@@ -1,0 +1,47 @@
+package com.company;
+
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner input= new Scanner(System.in);
+        double carPrice=0;
+        double downPayment=-1;
+        double loanPeriod=0;
+        double interestRate=0;
+        double monthlyRepayment=0;
+
+        while (carPrice<50000){
+            System.out.println("Enter car price (RM)");
+            carPrice=input.nextDouble();
+        }
+
+        while (downPayment<0){
+            System.out.println("Enter down payment (RM)");
+            downPayment=input.nextDouble();
+        }
+
+        while (loanPeriod<5||loanPeriod>9){
+            System.out.println("Enter loan period (years)");
+            loanPeriod=input.nextDouble();
+        }
+
+        while (interestRate<3||interestRate>7){
+            System.out.println("Enter interest rate (%)");
+            interestRate=input.nextDouble();
+        }
+
+        monthlyRepayment=((carPrice-downPayment)*interestRate/100/12)+(carPrice-downPayment)/(loanPeriod*12);
+        System.out.printf("monthly repayment=RM %.2f", +monthlyRepayment);
+        System.out.printf("\n\n%-8s%14s%20s%20s\n", "YEARS", "PRINCIPAL", "INTEREST", "BALANCE");
+        for(double n=1;n<=loanPeriod;n++){
+            System.out.printf("%-8.0f", n);
+            System.out.printf("%15.2f", (monthlyRepayment*12*n));
+            System.out.printf("%20.2f", (carPrice-downPayment)*interestRate/100*n);
+            System.out.printf("%20.2f\n", (monthlyRepayment*12)*(loanPeriod-n));
+        }
+
+
+    }
+}
